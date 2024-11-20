@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-2023mt03008
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-2023mt03008
+  template:
+    metadata:
+      labels:
+        app: app-2023mt03008
+    spec:
+      containers:
+      - name: cnr-2023mt03008
+        image: sandeshhebbar/img-2023mt03008:v1.0.0-prom
+        ports:
+        - containerPort: 8000
+        env:
+        - name: APP_TITLE
+          valueFrom:
+            configMapKeyRef:
+              name: config-2023mt03008
+              key: APP_TITLE
+        - name: APP_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: config-2023mt03008
+              key: APP_VERSION
